@@ -23,7 +23,7 @@ const doc = wnd["document"];
 // List of all games and an automated solver.
 const infiltrationGames = [
     {
-        name: "type it backward",
+        name: "type it",
         init: function (screen) {
             const lines = getLines(getEl(screen, "p"));
             state.game.data = lines[0].split("");
@@ -105,7 +105,7 @@ const infiltrationGames = [
  
             // Attack in next frame - instant attack sometimes
             // ends in failure.
-            if ('wait' === state.game.data && -1 !== data.indexOf("ATTACKING!")) {
+			if ('wait' === state.game.data && data[1].includes("Prep")) {
                 state.game.data = "attack";
             }
         },
@@ -636,7 +636,7 @@ function playGame() {
         return;
     }
  
-    const game = infiltrationGames.find((game) => game.name === title);
+	const game = infiltrationGames.find((game) => game.name.includes(title));
  
     if (game) {
         if (state.game.current !== title) {
